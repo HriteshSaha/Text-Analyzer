@@ -12,6 +12,23 @@ export default function TextForm(props) {
         setText(newText)
     }
 
+    const emailExtracter = () => {
+        let textArr = text.split(" ")
+        let allEmails = ""
+        textArr.forEach((email)=> {
+            if (email.includes("@") && email.includes(".com")){
+                allEmails = allEmails + email + ",  "
+            }
+        })
+        setEmail(allEmails)
+    }
+
+    const clearText = () => {
+        let newText = ""
+        setText(newText)
+        setEmail(newText)
+    }
+
     const handleClick = ()=> {
         if(toggle){
             handleUpClick()
@@ -29,6 +46,7 @@ export default function TextForm(props) {
     // States
     const [text, setText] = useState("")
     const [toggle, setToggle] = useState(true)
+    const [email, setEmail] = useState("")
     
     return (
         <>
@@ -38,7 +56,8 @@ export default function TextForm(props) {
                     <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
                 </div>
                 <button className="btn btn-primary" onClick={handleClick}>Convirt to Uppercase</button>
-                {/* <button className="btn btn-primary" onClick={handleDwClick}>Convirt to Lowercase</button> */}
+                <button className="btn btn-primary mx-3" onClick={clearText}>Clear all</button>
+                <button className="btn btn-primary" onClick={emailExtracter}>Extract e-mails</button>
             </div>
 
             <div className="container">
@@ -47,6 +66,9 @@ export default function TextForm(props) {
                 <p>{0.0008 * text.split(" ").length} minuits to read</p>
                 <h2>Preview</h2>
                 <p>{text}</p>
+                <br />
+                <h2>All the e-mails extracted from the text</h2>
+                <p>{email}</p>
             </div>
         </>
         

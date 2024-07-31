@@ -66,10 +66,10 @@ export default function TextForm(props) {
 
     return (
         <>
-            <div className="container my-3">
+            <div className="container my-3" style={{color:props.mode==="dark"?"white":"black"}}>
                 <h1>{props.heading}</h1>
                 <div className="mb-3">
-                    <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
+                    <textarea className="form-control" value={text} onChange={handleOnChange} style={{color:props.mode==="dark"?"white":"black"}} id="myBox" rows="8"></textarea>
                 </div>
                 <button className="btn btn-primary" onClick={handleClick}>Toggle text case</button>
                 <button className="btn btn-primary mx-2" onClick={clearText}>Clear all</button>
@@ -78,15 +78,15 @@ export default function TextForm(props) {
                 <button className="btn btn-primary" onClick={emailExtracter}>Extract e-mails</button>
             </div>
 
-            <div className="container">
+            <div className="container" style={{color:props.mode==="dark"?"white":"black"}}>
                 <h1>Your Text Summary</h1>
                 <p><b>{text.split(" ").length}</b> Words, and <b>{text.length}</b> character</p>
                 <p>{0.0008 * text.split(" ").length} minuits to read</p>
                 <h2>Preview</h2>
-                <p>{text}</p>
+                <p>{text.length>0?text:"Enter text in the above box to see the preview here"}</p>
                 <br />
                 <h2>All the e-mails extracted from the text</h2>
-                <p>{email}</p>
+                <p>{email.length>0?email:"No e-mail found"}</p>
             </div>
         </>
 
